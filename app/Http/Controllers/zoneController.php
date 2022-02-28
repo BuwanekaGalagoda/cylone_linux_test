@@ -10,8 +10,8 @@ class zoneController extends Controller
    public function index()
    {
        $zone = zone::latest()->paginate(5);
-       return view('zone.index',compact('zone'))
-            ->with('i' (request()->input('page', 1) - 1) * 5);
+       return view('zone.index',compact('zone'));
+            // ->with('i' (request()->input('page', 1) - 1) * 5);
    }
 
    public function create()

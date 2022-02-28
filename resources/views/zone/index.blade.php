@@ -29,7 +29,7 @@
     @foreach($zone as $zone)
     
     <tr>
-        <td>{{++$i}}</td>
+        {{-- <td>{{++$i}}</td> --}}
         <td>{{$zone->ldes}}</td>
         <td>{{$zone->sdes}}</td>
         <td>

@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
  Route::resource('zone', zoneController::class);
 // Route::view('form','zoneview');
+Route::resource('region', regionController::class);

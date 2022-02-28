@@ -7,79 +7,56 @@ use Illuminate\Http\Request;
 
 class regionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
-    {
-        //
-    }
+   {
+       $region = region::latest()->paginate(5);
+       return view('region.index',compact('region'));
+            // ->with('i' (request()->input('page', 1) - 1) * 5);
+   }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+   public function create()
+   {
+       return view('region.create');
+   }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+   public function store(Request $request)
+   {
+       $request->validate([
+           'rname'=>'required',
+       ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\region  $region
-     * @return \Illuminate\Http\Response
-     */
-    public function show(region $region)
-    {
-        //
-    }
+       region::create($request->all());
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\region  $region
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(region $region)
-    {
-        //
-    }
+       return redirect()->route('region.index')
+       ->with('success','region created successfully.');
+   }
+   public function show(region $region)
+   {
+       return view('region.show',compact('region'));
+   }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\region  $region
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, region $region)
-    {
-        //
-    }
+   public function edit(region $region)
+   {
+       return view('regione.edit',compact('region'));
+   }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\region  $region
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(region $region)
-    {
-        //
-    }
+   public function update(Request $request,region $region)
+   {
+       $request->validate([
+
+       ]);
+
+       $region->update($request->all());
+
+       return redirect()->route('region.index')
+       ->with('success','region updated successfully.');
+   }
+
+   public function destroy(region $region)
+   {
+       $region->delete();
+
+       return redirect()->route('region.index')
+       ->with('success','region deleted successfully.');
+   }
 }

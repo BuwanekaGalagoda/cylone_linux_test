@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-lg-12 margine-tb">
         <div class="pull-right">
-            <a class="btn btn-success" href="{{route('zone.create')}}">save</a>
+            <a class="btn btn-success" href="{{route('zone.create')}}">Add Zone</a>
         </div>
     </div>
 

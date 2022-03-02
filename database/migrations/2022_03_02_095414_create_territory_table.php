@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegionTable extends Migration
+class CreateTerritoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateRegionTable extends Migration
      */
     public function up()
     {
-        Schema::create('region', function (Blueprint $table) {
-            $table->increments('rid', 100)->primary();
-            $table->string('rname');
-            // $table->foreign('zid')->references('id')->on('zone');
+        Schema::create('territory', function (Blueprint $table) {
+            $table->increments('tid', 100)->primary();
+            $table->string('tcode');
+            $table->string('tname');
             $table->unsignedBigInteger('id');
             $table->foreign('id')->references('id')->on('zone');
+            $table->unsignedBigInteger('rid');
+            $table->foreign('rid')->references('rid')->on('region');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateRegionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('region');
+        Schema::dropIfExists('territory');
     }
 }

@@ -14,12 +14,12 @@ class CreateTerritoryTable extends Migration
     public function up()
     {
         Schema::create('territory', function (Blueprint $table) {
-            $table->increments('tid', 100)->primary();
+            $table->increments('tid');
             $table->string('tcode');
             $table->string('tname');
-            $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('zone');
-            $table->unsignedBigInteger('rid');
+            $table->bigInteger('zid')->unsigned();
+            $table->integer('rid')->unsigned();
+            $table->foreign('zid')->references('id')->on('zone');
             $table->foreign('rid')->references('rid')->on('region');
             $table->timestamps();
         });

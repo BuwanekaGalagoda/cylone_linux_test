@@ -17,7 +17,7 @@ class CreateTerritoryTable extends Migration
             $table->increments('tid');
             $table->string('tcode');
             $table->string('tname');
-            $table->bigInteger('zid')->unsigned();
+            $table->unsignedBigInteger('zid');
             $table->integer('rid')->unsigned();
             $table->foreign('zid')->references('id')->on('zone');
             $table->foreign('rid')->references('rid')->on('region');

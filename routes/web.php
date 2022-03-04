@@ -21,3 +21,5 @@ Route::get('/', function () {
 // Route::view('form','zoneview');
 //  Route::resource('region', regionController::class);
 Route::resource('region','App\Http\Controllers\regionController');
+
+Route::resource('territory','App\Http\Controllers\territoryController');

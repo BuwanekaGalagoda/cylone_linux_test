@@ -23,3 +23,6 @@ Route::get('/', function () {
 Route::resource('region','App\Http\Controllers\regionController');
 
 Route::resource('territory','App\Http\Controllers\territoryController');
+
+Route::get('/', [territoryController::class, 'index']);
+Route::get('/getregion/{id}', [territoryController::class, 'getregion']);

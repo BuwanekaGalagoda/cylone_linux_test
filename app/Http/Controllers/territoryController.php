@@ -9,10 +9,26 @@ class territoryController extends Controller
 {
    public function index()
    {
+    
        $territory = territory::latest()->paginate(5);
        return view('territory.index',compact('territory'));
             // ->with('i' (request()->input('page', 1) - 1) * 5);
    }
+   public function getzone($id=0){
+       //    fetch zone
+    $zonedata['data'] = zone::orderby("id")
+    ->select('id')
+    ->get();
+    // fetch zone end
+   }
+
+   public function getregion($rid=0){
+    //    fetch zone
+ $regiondata['data'] = region::orderby("rid")
+ ->select('rid')
+ ->get();
+ // fetch zone end
+}
 
    public function create()
    {

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\territory;
+use App\Models\region;
+use App\Models\zone;
 use Illuminate\Http\Request;
 
 class territoryController extends Controller
@@ -13,22 +15,31 @@ class territoryController extends Controller
        $territory = territory::latest()->paginate(5);
        return view('territory.index',compact('territory'));
             // ->with('i' (request()->input('page', 1) - 1) * 5);
-   }
-   public function getzone($id=0){
-       //    fetch zone
-    $zonedata['data'] = zone::orderby("id")
-    ->select('id')
-    ->get();
-    // fetch zone end
-   }
+        
+        // fetch start
+         // Fetch zone
+       $zone['data'] = zone::orderby("ldes","sdes")
+       ->select('id','sdes')
+       ->get();
 
-   public function getregion($rid=0){
-    //    fetch zone
- $regiondata['data'] = region::orderby("rid")
- ->select('rid')
- ->get();
- // fetch zone end
-}
+ // Load index view
+ return view('index')->with("zone",$zone);
+    }
+
+// Fetch records
+public function getregion($region=0)
+{
+
+ // Fetch name by region
+ $terdata['data'] = region::orderby("rname","id")
+    ->select('rid','rname')
+    ->where('region',$region)
+    ->get();
+
+ return response()->json($terdata);
+        // fetch end
+        }
+   
 
    public function create()
    {
@@ -38,10 +49,10 @@ class territoryController extends Controller
    public function store(Request $request)
    {
        $request->validate([
-           'tcode'=>'required',
-           'tname'=>'required',
            'zid '=>'required',
            'rid '=>'required',
+           'tcode'=>'required',
+           'tname'=>'required',
        ]);
 
        territory::create($request->all());
